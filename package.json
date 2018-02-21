@@ -1,0 +1,25 @@
+{
+  "name": "utiliboat",
+  "version": "1.0.0",
+  "description": "Utility Purpose Discord Bot for all types of servers available.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PillGP/utiliboat.git"
+  },
+  "author": "PillGP#2767",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/PillGP/utiliboat/issues"
+  },
+  "homepage": "https://github.com/PillGP/utiliboat#readme",
+  "dependencies": {
+    "discord.js": "^11.3.0",
+    "dotenv": "^5.0.0",
+    "mocha": "^5.0.1"
+  }
+}
