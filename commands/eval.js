@@ -1,33 +1,33 @@
-function clean(text) {
-    if (typeof(text) === "string")
-      return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-    else return text;
-}
+const Command = require('../modules/command.js');
 
-exports.run = (client, msg, args, embed) => {
-      if(msg.author.id !== process.env.OWNER) return;
-          try {
-            const code = args.join(" ");
-            let evaled = eval(code);
-            if (typeof evaled !== "string")
-              evaled = require("util").inspect(evaled);
-              embed.setColor(client.colors.success);
-              embed.setTitle('<:tickYes:412632634070532097> | Eval [success]');
-              embed.addField('Input', '```'+args.join(" ")+'```');
-              embed.addField('Output', '```'+clean(evaled)+'```');
-              msg.channel.send({embed});
-          } catch (err) {
-              embed.setColor(client.colors.error);
-              embed.setTitle('<:tickNo:412632888010604555> | Eval [error]');
-              embed.addField('Input', '```'+args.join(" ")+'```');
-              embed.addField('Output', '```'+clean(err)+'```');
-              msg.channel.send({embed});
-          }
-}
+module.exports = class Eval extends Command {
 
-exports.command = {
-    name: "eval",
-    fullCmd: process.env.PREFIX+"eval",
-    description: "Evals JavaScript code",
-    hidden: true
+  constructor(client) {
+    super(client);
+
+    this.name     = "eval";
+    this.aliases  = ["e", "evaluate", "execute", "exec"];
+    this.hideHelp = true;
+  }
+
+  run(msg, args) {
+    try {
+      const code = args.join(" ");
+      let evaled = this.clean(require("util").inspect(eval(code)));
+      msg.channel.send(evaled, {code: "xl" }).catch(err => {
+        msg.channel.send(`\`ERROR\` \`\`\`xl\n${this.clean(err)}\n\`\`\``);
+      });
+    } catch (err) {
+      msg.channel.send(`\`ERROR\` \`\`\`xl\n${this.clean(err)}\n\`\`\``);
+    }
+  }
+
+  canRun(msg) {
+    return msg.author.id == this.client.config.ownerId;
+  }
+
+  clean(text) {
+    return typeof text === "string" ? text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203)) : text;
+  }
+
 }

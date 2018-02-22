@@ -1,0 +1,20 @@
+{
+    "code": "en_US",
+    "and": " and ",
+    "server_join": {
+        "title": "Hello, I'm Utiliboat, a Utility Purpose Discord Bot for all types of servers available.",
+        "description": "I was made by **PillGP#2767** to help you in everyday tasks.\n\nIf you want to know more about me, type `u!help`.\n\n[Add me to your server]({0}) | [Check my Github repository]({1}) | [Donate so that I can stay alive 24/7]({2})"
+    },
+    "commands": {
+        "help": {
+            "check_dm": "I've sent you a list of my commands in your DMs",
+            "_description": "Sends you a private message with all of my commands",
+            "_usage": "u!help"
+        }
+    },
+    "usage": "**Usage:**",
+    "example": "**Example:**",
+    "yes": "Yes",
+    "no": "No",
+    "missing_manageguild_permission": "You need the **\"Manage Guild**\" permission in order to do this"
+}
