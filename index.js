@@ -1,11 +1,10 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client();
-const colors = require('./assets/colors.json');
 require('dotenv').config();
 client.commands = new Discord.Collection();
 client.colors = require('./assets/colors.json');
-function emb(msg) { return new Discord.RichEmbed() .setColor(colors.embed) .setFooter(msg.author.tag, msg.author.avatarURL); }
+function emb(msg, client) { return new Discord.RichEmbed() .setColor(client.colors.embed) .setFooter(msg.author.tag, msg.author.avatarURL); }
 client.login(process.env.LOGIN);
 
 fs.readdir('./commands/', (err, files) => {
@@ -38,7 +37,7 @@ client.on("message", msg => {
     const command = args.shift().slice(process.env.PREFIX.length).toLowerCase();
     try {
       let commandFile = client.commands.get(command);
-      let embed = emb(msg);
+      let embed = emb(msg, client);
       if(commandFile) commandFile.run(client, msg, args, embed);
     } catch (err) {
       console.log(err);
