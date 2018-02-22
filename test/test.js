@@ -11,11 +11,11 @@ describe('Commands', function() {
   });
 });
 
-describe('Event Files', function() {
+describe('Event Listeners', function() {
   it('should load succesfully', function() {
-    fs.readdirSync("./events").forEach(file => {
+    fs.readdirSync("./listeners").forEach(file => {
       if (file.endsWith(".js")) {
-        require("../events/"+file);
+        require("../listeners/"+file);
       }
     });
   });
