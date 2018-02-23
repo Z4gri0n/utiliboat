@@ -1,15 +1,12 @@
 const Command = require('../modules/command.js');
 
 module.exports = class Help extends Command {
-
     constructor(client) {
         super(client);
-
         this.name = 'help';
         this.aliases = ['h'];
         this.strings = require('../strings/strings.json');
     }
-
     run(msg, args, strings) {
         let embed = this.client.getEmbed(msg);
         embed.setDescription(`**${strings.check_dm}**`);
